@@ -1,6 +1,12 @@
 body {
-  font-family: system-ui;
-  background: #f06d06;
-  color: white;
   text-align: center;
+  background: #222;
+  color: white;
+  font-family: sans-serif;
+}
+canvas {
+  background: #333;
+  border: 2px solid white;
+  display: block;
+  margin: 10px auto;
 }
