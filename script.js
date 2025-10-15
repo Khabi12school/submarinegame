@@ -32,7 +32,7 @@ canvas.addEventListener("click", (e) => {
 // Draw the game each frame
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "cyan";
+  ctx.fillStyle = "green";
   ctx.fillRect(square.x, square.y, square.size, square.size);
   requestAnimationFrame(draw);
 }
