@@ -1,41 +1,48 @@
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
-const scoreDisplay = document.getElementById("score");
+const player = document.getElementById("player");
 
-let square = { x: 50, y: 50, size: 30 };
-let score = 0;
+let position = { x: 375, y: 0 };
+let velocity = { x: 0, y: 0 };
+const gravity = 0.6;  // strength of gravity
+const jumpForce = -12;
+const speed = 5;
+const floorY = 550; // ground level (600px height - 50px player)
+let keys = { w: false, a: false, s: false, d: false };
 
-// Move the square to a new random spot
-function moveSquare() {
-  square.x = Math.random() * (canvas.width - square.size);
-  square.y = Math.random() * (canvas.height - square.size);
-}
-
-// Detect clicks
-canvas.addEventListener("click", (e) => {
-  const rect = canvas.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
-
-  if (
-    x >= square.x &&
-    x <= square.x + square.size &&
-    y >= square.y &&
-    y <= square.y + square.size
-  ) {
-    score++;
-    scoreDisplay.textContent = score;
-    moveSquare();
-  }
+// Handle key input
+document.addEventListener("keydown", (e) => {
+  if (e.key === "w" && position.y >= floorY) velocity.y = jumpForce; // jump
+  if (e.key === "a") keys.a = true;
+  if (e.key === "d") keys.d = true;
 });
 
-// Draw the game each frame
-function draw() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "green";
-  ctx.fillRect(square.x, square.y, square.size, square.size);
-  requestAnimationFrame(draw);
+document.addEventListener("keyup", (e) => {
+  if (e.key === "a") keys.a = false;
+  if (e.key === "d") keys.d = false;
+});
+
+function gameLoop() {
+  // Horizontal movement
+  if (keys.a) position.x -= speed;
+  if (keys.d) position.x += speed;
+
+  // Apply gravity
+  velocity.y += gravity;
+  position.y += velocity.y;
+
+  // Floor collision
+  if (position.y >= floorY) {
+    position.y = floorY;
+    velocity.y = 0;
+  }
+
+  // Keep player in bounds
+  position.x = Math.max(0, Math.min(750, position.x));
+
+  // Update position
+  player.style.left = position.x + "px";
+  player.style.top = position.y + "px";
+
+  requestAnimationFrame(gameLoop);
 }
 
-moveSquare();
-draw();
+gameLoop();
