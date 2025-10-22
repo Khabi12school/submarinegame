@@ -1,11 +1,11 @@
 const player = document.getElementById("player");
 
-let position = { x: 375, y: 0 };
+let position = { x: 370, y: 500 };
 let velocity = { x: 0, y: 0 };
-const gravity = 0.6;  // strength of gravity
-const jumpForce = -12;
+const gravity = 0.4;  // strength of gravity
+const jumpForce = -10;
 const speed = 5;
-const floorY = 550; // ground level (600px height - 50px player)
+const floorY = 450; // ground level (600px height - 50px player)
 let keys = { w: false, a: false, s: false, d: false };
 
 // Handle key input
@@ -36,7 +36,7 @@ function gameLoop() {
   }
 
   // Keep player in bounds
-  position.x = Math.max(0, Math.min(750, position.x));
+  position.x = Math.max(0, Math.min(1300, position.x));
 
   // Update position
   player.style.left = position.x + "px";
