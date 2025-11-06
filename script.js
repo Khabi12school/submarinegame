@@ -44,5 +44,19 @@ function gameLoop() {
 
   requestAnimationFrame(gameLoop);
 }
+const menu = document.getElementById("menu");
+const gameArea = document.getElementById("gameArea");
+const playButton = document.getElementById("playButton");
+
+playButton.addEventListener("click", () => {
+  // Hide menu
+  menu.style.display = "none";
+
+  // Show game
+  gameArea.style.display = "block";
+
+  console.log("Game started!");
+  // You can also start your game loop or logic here.
+});
 
 gameLoop();

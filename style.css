@@ -12,10 +12,9 @@
 #player {
   width: 50px;
   height: 50px;
-  background: red;
   position: absolute;
   left: 350px;
-  top: 100;
+  top: 200px;
 }
 #dawd {
   position: absolute;  /* allows free positioning */
@@ -23,4 +22,19 @@
   top: 440px;          /* distance from top of the game area */
   width: 100px;
   height: 100px;
+}
+
+#menu {
+  position: fixed;          /* keeps it covering the screen */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, #444, #111); /* gradient background */
+  display: flex;            /* centers content easily */
+  flex-direction: column;   /* stacks items vertically */
+  align-items: center;      /* centers horizontally */
+  justify-content: center;  /* centers vertically */
+  gap: 20px;                /* space between items */
+  z-index: 10;              /* makes sure it's on top */
 }
